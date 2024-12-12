@@ -7,6 +7,8 @@ const LoginForm = ({setAuthToken}) => {
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
+
+    const apiUrl = process.env.REACT_APP_BACKEND_URL;
     
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -15,7 +17,7 @@ const LoginForm = ({setAuthToken}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await fetch('http://localhost:5000/api/auth/login', {
+          const response = await fetch(`${apiUrl}/api/auth/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

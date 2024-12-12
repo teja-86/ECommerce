@@ -8,11 +8,12 @@ const Shop = () => {
   const [likedProducts, setLikedProducts] = useState([]);
   const navigate = useNavigate();
 
-    
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
+  
       useEffect(() => {
         const fetchProducts = async () => {
           try {
-            const response = await fetch('http://localhost:5000/api/product/products');
+            const response = await fetch(`${apiUrl}/api/product/products`);
             const data = await response.json();
             setProducts(data);
           } catch (error) {

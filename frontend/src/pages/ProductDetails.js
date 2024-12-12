@@ -12,11 +12,12 @@ const ProductDetails = () => {
   const [likedProducts, setLikedProducts] = useState([]);
   const navigate = useNavigate();
 
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/product/products/${id}`);
+        const response = await fetch(`${apiUrl}/api/product/products/${id}`);
         const data = await response.json();
         setProduct(data);
       } catch (error) {
@@ -31,7 +32,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/product/products');
+        const response = await fetch(`${apiUrl}/api/product/products`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {
@@ -76,7 +77,7 @@ const ProductDetails = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:5000/api/cart/carts', {
+      const response = await fetch(`${apiUrl}/api/cart/carts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

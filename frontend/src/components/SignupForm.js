@@ -10,6 +10,8 @@ const SignupForm = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
 
+    const apiUrl = process.env.REACT_APP_BACKEND_URL;
+
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };
@@ -17,7 +19,7 @@ const SignupForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const response = await fetch('http://localhost:5000/api/auth/register', {
+          const response = await fetch(`${apiUrl}/api/auth/register`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

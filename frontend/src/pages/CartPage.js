@@ -7,7 +7,8 @@ const CartPage = () => {
   const [cart, setCart] = useState([]);
   const [shippingOption, setShippingOption] = useState('free');
   const navigate = useNavigate();
-  console.log(cart);
+  
+  const apiUrl = process.env.REACT_APP_BACKEND_URL;
   
 
   useEffect(() => {
@@ -19,7 +20,7 @@ const CartPage = () => {
       }      
 
       try {
-        const response = await fetch('http://localhost:5000/api/cart/carts', {
+        const response = await fetch(`${apiUrl}/api/cart/carts`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -72,7 +73,7 @@ const CartPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/cart/carts', {
+      const response = await fetch(`${apiUrl}/api/cart/carts`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`, // Ensure `token` is a valid string
@@ -96,7 +97,7 @@ const CartPage = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/cart/carts/${productId}`, {
+      const response = await fetch(`${apiUrl}/api/cart/carts/${productId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
