@@ -12,8 +12,20 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
-app.use(cors({ 
-  origin: '*', // Update with your client origin
+app.use(cors({
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      'https://e-commerce-eight-blue.vercel.app',
+      'https://another-frontend-url.com',
+      'http://localhost:3000', // Add any other origins you want to allow
+    ];
+    
+    if (allowedOrigins.includes(origin) || !origin) { // The !origin check allows requests from non-browser clients
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('CORS not allowed'), false); // Reject the request
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Authorization', 'Content-Type']
 }));
