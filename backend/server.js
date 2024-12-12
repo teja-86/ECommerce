@@ -30,7 +30,6 @@ app.use(cors({
   allowedHeaders: ['Authorization', 'Content-Type']
 }));
 
-app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 app.use('/api/auth', authRouter);
 app.use('/api/product', productRouter);
